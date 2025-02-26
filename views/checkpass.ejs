@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Secrets</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<style>
+  .toggle-container {
+      align-items: center;
+  }
+
+  .toggle-container input[type="checkbox"] {
+      margin-left: 10px;
+      margin-top: 30px;
+  }
+</style>
+
+<body>
+
+
+
+<div class="container mt-5">
+    <h1>Enter The OTP Sent to Your E-mail</h1><BR></BR>
+<div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body"> 
+
+          <!-- Makes POST request to /register route -->
+          <form action="/checkpass" method="POST">
+            <div class="form-group">
+              <input type="hidden" name="username" value="<%= typeof username !== 'undefined' ? username : " " %>">
+              <label for="password">OTP</label>
+              <input type="number" class="form-control" name="otp">
+            </div>
+            <p style="color: red;"><%= typeof dataotp !== 'undefined' ? dataotp : " " %></p>
+            <div class="form-group">
+                <label for="password">Enter New Password</label>
+                <input type="password" class="form-control" name="newpass">
+              </div>
+              <div class="toggle-container form-group">
+                <label for="password">Re-Enter the Password:</label>
+                <input type="password" class="form-control" id="password"  name="renewpass" data-visible="false">
+                 <input type="checkbox" id="togglePassword"> Show Password
+            </div>
+        
+              <p style="color: red;"><%= typeof data !== 'undefined' ? data : " " %></p>
+            <button type="submit" class="btn btn-dark">Submit</button>  
+          </form>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+
+  togglePassword.addEventListener('change', function (e) {
+      // toggle the type attribute
+      const isVisible = password.getAttribute('data-visible') === 'true';
+      password.setAttribute('type', isVisible ? 'password' : 'text');
+      password.setAttribute('data-visible', !isVisible);
+  });
+</script>
+</html>
